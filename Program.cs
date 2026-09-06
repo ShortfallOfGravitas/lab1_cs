@@ -1,4 +1,4 @@
-﻿using Avalonia;
+﻿using avalonia;
 using System;
 
 namespace LissajousApp;
