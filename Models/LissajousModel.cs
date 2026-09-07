@@ -17,8 +17,8 @@ public class LissajousModel(double amplX, double amplY,
     public List<Coordinate> PointsList = new List<Coordinate>(); //array with coordinates
     private Stack<List<Coordinate>> history = new Stack<List<Coordinate>>();
 
-    private int dots = 20; //точки на найкоротший відрізок
-    private double t;   //час у симуляції
+    public int dots = 20; //точки на найкоротший відрізок
+    // private double t;   //час у симуляції онлі всередині for
     private double Dt;  // delta t (sampling rate, інтервал дискретизації) 
     
     //amplitude
@@ -34,12 +34,15 @@ public class LissajousModel(double amplX, double amplY,
     private double py = phY;
 
     
-    CalculateSamplRate(a, b)
+    double CalculateSamplRate()
     {
-        double maxFreq = Math.Max(a, b);
+        double maxFreq = Math.Max(freqX, freqY);
 
         double periodT = 1.0 / maxFreq;
 
-        return double deltaT = periodT / dots;
+        return periodT / dots;
     }
+    
+    
+    
 }
