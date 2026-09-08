@@ -5,8 +5,8 @@ namespace LissajousApp.Models;
 
 public readonly struct Coordinate(double x, double y)
 {
-    public double X { get; } = X;   //треба розібратись
-    public double Y { get; } = Y;
+    public double X { get; } = x;   //треба розібратись
+    public double Y { get; } = y;
 }
 
 
@@ -34,15 +34,40 @@ public class LissajousModel(double amplX, double amplY,
     private double py = phY;
 
     
-    double CalculateSamplRate()
+    private double CalculateSamplRate()
     {
-        double maxFreq = Math.Max(freqX, freqY);
+        double maxFreq = Math.Max(fx, fy);
 
         double periodT = 1.0 / maxFreq;
 
-        return periodT / dots;
+        return (periodT / dots);
     }
-    
-    
-    
+
+    public void Generate()
+    {
+        if (PointsList.Count > 0)
+        {
+            history.Push(PointsList);
+        }
+
+        PointsList = new List<Coordinate>();
+        
+        Dt = CalculateSamplRate();
+        double tmax = 10.0;     //максимальний час симуляції
+
+        double pxRad = px * Math.PI / 180.0;    //переведення у радіани
+        double pyRad = py * Math.PI / 180.0;
+
+        double omegaX = 2 * Math.PI * fx;   //кутова швидкість константна, тож виносимо за межі циклу
+        double omegaY = 2 * Math.PI * fy;
+        
+        for (double t = 0; t <= tmax; t += Dt)
+        {
+            double currentX = Ax * Math.Sin(omegaX * t + pxRad);
+            double currentY = Ay * Math.Sin(omegaY * t + pyRad);
+            
+            Coordinate point = new Coordinate(currentX, currentY);
+            PointsList.Add(point);
+        }
+    }
 }
