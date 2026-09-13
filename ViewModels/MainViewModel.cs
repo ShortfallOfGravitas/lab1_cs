@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Avalonia;
@@ -52,13 +53,20 @@ public class MainViewModel : ViewModelBase
         set => SetProperty(ref _py, value);
     }
 
-    public ObservableCollection<Avalonia.Point> CurvePoints { get; } = new ObservableCollection<Avalonia.Point>();
+    private List<Avalonia.Point> _curvePoints = new();
+
+    public List<Avalonia.Point> CurvePoints
+    {
+        get => _curvePoints;
+        set => SetProperty(ref _curvePoints, value);
+    }
 
     public void GenerateCurveCommand()
     {
         var model = new LissajousModel(Ax, Ay, Fx, Fy, Px, Py);
         model.Generate();
-        CurvePoints.Clear();
+
+        var newPoints = new List<Avalonia.Point>();
         
         double canvasWidth = 600;
         double canvasHeight = 600;
@@ -67,9 +75,8 @@ public class MainViewModel : ViewModelBase
         {
             double screenX = (canvasWidth / 2.0) + mathPoint.X;
             double screenY = (canvasHeight / 2.0) - mathPoint.Y;
-            CurvePoints.Add(new Avalonia.Point(screenX, screenY));
+            newPoints.Add(new Avalonia.Point(screenX, screenY));
         }
-
+        CurvePoints = newPoints;
     }
-    
 }

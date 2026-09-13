@@ -35,7 +35,7 @@
                     Margin="0, 20, 0, 0" />
         </StackPanel>
      
-     <Canvas Grid.Column="1" Background="WhiteSmoke" ClipToBounds="True">
+     <Canvas Grid.Column="1" Background="WhiteSmoke" ClipToBounds="True" Width="600" Height="600">
          <Polyline Points="{Binding CurvePoints}" Stroke="Blue" StrokeThickness="2"/>
      </Canvas>
  </Grid>
