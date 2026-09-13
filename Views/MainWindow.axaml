@@ -1,21 +1,42 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:LissajousApp.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="LissajousApp.Views.MainWindow"
         x:DataType="vm:MainViewModel"
-        Icon="/Assets/avalonia-logo.ico"
         Title="LissajousApp">
-
         
-<Grid ColumnDefinitions="250, *">
-        <StackPanel Grid.Column = "0" Margin="15" Spacing="10">
-                
-                <TextBlock Text="Амплітуда X:" FontWeight="Bold"/>
-                <Slider Minimum="1" Maximum="300" Value="{Binding Ax}"/>
-                
-    
-
+        <!-- icon -->
+        
+ <Grid ColumnDefinitions="250, *">
+        <StackPanel Grid.Column="0" Margin="15" Spacing="10">
+            <TextBlock Text="Ампліітуда X:" FontWeight="Bold"/>
+            <Slider Minimum="1" Maximum="300" Value="{Binding Ax}"/>
+            
+            <TextBlock Text="Амплітуда Y:" FontWeight="Bold"/>
+            <Slider Minimum="1" Maximum="300" Value="{Binding Ay}"/>
+            
+            <TextBlock Text="Частота X (fx):" FontWeight="Bold"/>
+            <!-- NumericUpDown для тонких дробових частот -->
+            <NumericUpDown Value="{Binding Fx}" Minimum="0.1" Increment="0.5"/>
+            
+            <TextBlock Text="Частота Y (fy):" FontWeight="Bold"/>
+            <NumericUpDown Value="{Binding Fy}" Minimum="0.1" Increment="0.5"/>
+            
+            <TextBlock Text="Фаза X (градуси):" FontWeight="Bold"/>
+            <Slider Minimum="0" Maximum="360" Value="{Binding Px}"/>
+            
+            <TextBlock Text="Фаза Y (градуси):" FontWeight="Bold"/>
+            <Slider Minimum="0" Maximum="360" Value="{Binding Py}"/>
+            
+            <Button Content="Побудувати фігуру"
+                    Command="{Binding GenerateCurveCommand}"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Margin="0, 20, 0, 0" />
+        </StackPanel>
+     
+     <Canvas Grid.Column="1" Background="WhiteSmoke" ClipToBounds="True">
+         <Polyline Points="{Binding CurvePoints}" Stroke="Blue" StrokeThickness="2"/>
+     </Canvas>
+ </Grid>
 </Window>
