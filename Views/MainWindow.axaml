@@ -10,10 +10,22 @@
  <Grid ColumnDefinitions="250, *">
         <StackPanel Grid.Column="0" Margin="15" Spacing="10">
             <TextBlock Text="Ампліітуда X:" FontWeight="Bold"/>
-            <Slider Minimum="1" Maximum="300" Value="{Binding Ax}"/>
+            <Grid ColumnDefinitions="*, 70">
+                <Slider Grid.Column="0" Minimum="1" Maximum="300" Value="{Binding Ax}"/>
+                <TextBlock Grid.Column="1" 
+                           Text="{Binding Ax, StringFormat=\{0:0.00\}}" 
+                           Margin="10,16"
+                           />
+            </Grid>
             
             <TextBlock Text="Амплітуда Y:" FontWeight="Bold"/>
-            <Slider Minimum="1" Maximum="300" Value="{Binding Ay}"/>
+            <Grid ColumnDefinitions="*, 70">
+                <Slider Grid.Column="0" Minimum="1" Maximum="300" Value="{Binding Ay}"/>
+                <TextBlock Grid.Column="1"
+                           Text="{Binding Ay, StringFormat=\{0:0.00\}}"
+                           Margin="10, 16"
+                           />
+            </Grid>
             
             <TextBlock Text="Частота X (fx):" FontWeight="Bold"/>
             <!-- NumericUpDown для тонких дробових частот -->
