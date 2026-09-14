@@ -8,7 +8,7 @@
         <!-- icon -->
         
  <Grid ColumnDefinitions="250, *">
-        <StackPanel Grid.Column="0" Margin="15" Spacing="10">
+        <StackPanel Grid.Column="0" Margin="15" Spacing="5">
             <TextBlock Text="Ампліітуда X:" FontWeight="Bold"/>
             <Grid ColumnDefinitions="*, 70">
                 <Slider Grid.Column="0" Minimum="1" Maximum="300" Value="{Binding Ax}"/>
@@ -32,14 +32,24 @@
             <NumericUpDown Value="{Binding Fx}" Minimum="0.1" Increment="0.5"/>
             
             <TextBlock Text="Частота Y (fy):" FontWeight="Bold"/>
-            <NumericUpDown Value="{Binding Fy}" Minimum="0.1" Increment="0.5"/>
+            <NumericUpDown Value="{Binding Fy}" Minimum="0.1" Increment="0.5" Margin="0, 0, 0, 25"/>
             
             <TextBlock Text="Фаза X (градуси):" FontWeight="Bold"/>
-            <Slider Minimum="0" Maximum="360" Value="{Binding Px}"/>
-            
+            <Grid ColumnDefinitions="*, 70">
+                <Slider Grid.Column="0" Minimum="0" Maximum="360" Value="{Binding Px}"/>
+                <TextBlock Grid.Column="1"
+                           Text="{Binding Px, StringFormat=\{0:0.00\}}"
+                           Margin="10, 16"
+                           />
+            </Grid>
             <TextBlock Text="Фаза Y (градуси):" FontWeight="Bold"/>
-            <Slider Minimum="0" Maximum="360" Value="{Binding Py}"/>
-            
+            <Grid ColumnDefinitions="*, 70">
+                <Slider Grid.Column="0" Minimum="0" Maximum="360" Value="{Binding Py}"/>
+                <TextBlock Grid.Column="1"
+                           Text="{Binding Py, StringFormat=\{0:0.00\}}"
+                           Margin="10, 16"
+                           />
+            </Grid>
             <Button Content="Побудувати фігуру"
                     Command="{Binding GenerateCurveCommand}"
                     HorizontalAlignment="Stretch"
