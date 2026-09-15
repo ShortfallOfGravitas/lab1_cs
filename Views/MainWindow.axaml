@@ -50,11 +50,18 @@
                            Margin="10, 16"
                            />
             </Grid>
+            
+            <TextBlock Text="Точок на період (крок часу):" FontWeight="Bold"/>
+            <Grid ColumnDefinitions="*, 70">
+                <Slider Grid.Column="0" Minimum="20" Maximum="500" Value="{Binding Dots}" Margin="0, 0, 10, 0"/>
+                <TextBlock Grid.Column="1" Text="{Binding Dots}" VerticalAlignment="Center"/>
+            </Grid>
+            
             <Button Content="Побудувати фігуру"
                     Command="{Binding GenerateCurveCommand}"
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Center"
-                    Margin="0, 20, 0, 0" />
+                    Margin="0, 20, 0, 20" />
         </StackPanel>
      
      <Canvas Grid.Column="1" Background="WhiteSmoke" ClipToBounds="True" Width="600" Height="600">

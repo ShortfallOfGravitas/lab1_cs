@@ -17,7 +17,7 @@ public class LissajousModel(double amplX, double amplY,
     public List<Coordinate> PointsList = new List<Coordinate>(); //array with coordinates
     private Stack<List<Coordinate>> history = new Stack<List<Coordinate>>();
 
-    public int dots = 20; //точки на найкоротший відрізок
+    public int dots; //точки на найкоротший відрізок
     // private double t;   //час у симуляції онлі всередині for
     private double Dt;  // delta t (sampling rate, інтервал дискретизації) 
     

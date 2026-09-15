@@ -8,6 +8,14 @@ namespace LissajousApp.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
+    //time step
+    private int _dots = 100;
+    public int Dots
+    {
+        get => _dots;
+        set => SetProperty(ref _dots, value);
+    }
+    
     //amplitude
     private double _ax = 150;
     public double Ax
@@ -64,6 +72,7 @@ public class MainViewModel : ViewModelBase
     public void GenerateCurveCommand()
     {
         var model = new LissajousModel(Ax, Ay, Fx, Fy, Px, Py);
+        model.dots = Dots;  //оновлюємо кількість точок в моделі
         model.Generate();
 
         var newPoints = new List<Avalonia.Point>();
