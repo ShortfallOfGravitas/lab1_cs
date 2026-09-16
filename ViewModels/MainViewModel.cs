@@ -32,15 +32,15 @@ public class MainViewModel : ViewModelBase
     }
     
     //frequency
-    private double _fx = 2;
-    public double Fx
+    private double? _fx = 2;
+    public double? Fx
     {
         get => _fx;
         set => SetProperty(ref _fx, value);
     }
     
-    private double _fy = 3;
-    public double Fy
+    private double? _fy = 3;
+    public double? Fy
     {
         get => _fy;
         set => SetProperty(ref _fy, value);
@@ -71,7 +71,6 @@ public class MainViewModel : ViewModelBase
 
     //error handling
     private string _errorMessage = "";
-
     public string ErrorMessage
     {
         get => _errorMessage;
@@ -80,10 +79,29 @@ public class MainViewModel : ViewModelBase
     
     public void GenerateCurveCommand()
     {
-        var model = new LissajousModel(Ax, Ay, Fx, Fy, Px, Py);
+        if (Fx == null || Fy == null)
+        {
+            ErrorMessage = "Помилка: Введіть значення частоти!";
+            return;
+        }
+
+        if (Fx > 100 || Fy > 100)
+        {
+            ErrorMessage = "Помилка! Частота не може бути більшою за 100!";
+            return;
+        }
+
+        ErrorMessage = "";  //якщо все ок, ховаємо текст помилки
+        
+        var model = new LissajousModel(Ax, Ay, Fx.Value, Fy.Value, Px, Py);
         model.dots = Dots;  //оновлюємо кількість точок в моделі
         model.Generate();
 
+        if (model.PointsList.Count >= 500_000)
+        {
+            ErrorMessage = "Увага! Досягнуто ліміт безпеки! Показано лише частину фігури.";
+        }
+        
         var newPoints = new List<Avalonia.Point>();
         
         double canvasWidth = 600;

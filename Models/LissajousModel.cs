@@ -67,7 +67,6 @@ public class LissajousModel(double amplX, double amplY,
         {
             if (PointsList.Count >= maxSafePoints)
             {
-                throw new InvalidOperationException("Перевищено ліміт точок! Зменште частоту або крок.");
                 break;
             }
             
