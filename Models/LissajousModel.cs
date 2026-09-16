@@ -45,6 +45,8 @@ public class LissajousModel(double amplX, double amplY,
 
     public void Generate()
     {
+        int maxSafePoints = 500000; //розраховано: tmax * fmax * dots
+        
         if (PointsList.Count > 0)
         {
             history.Push(PointsList);
@@ -63,6 +65,12 @@ public class LissajousModel(double amplX, double amplY,
         
         for (double t = 0; t <= tmax; t += Dt)
         {
+            if (PointsList.Count >= maxSafePoints)
+            {
+                throw new InvalidOperationException("Перевищено ліміт точок! Зменште частоту або крок.");
+                break;
+            }
+            
             double currentX = Ax * Math.Sin(omegaX * t + pxRad);
             double currentY = Ay * Math.Sin(omegaY * t + pyRad);
             

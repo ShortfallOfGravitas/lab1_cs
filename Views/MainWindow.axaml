@@ -29,10 +29,10 @@
             
             <TextBlock Text="Частота X (fx):" FontWeight="Bold"/>
             <!-- NumericUpDown для тонких дробових частот -->
-            <NumericUpDown Value="{Binding Fx}" Minimum="0.1" Increment="0.5"/>
+            <NumericUpDown Value="{Binding Fx}" Minimum="0.1" Maximum="100" Increment="0.5"/>
             
             <TextBlock Text="Частота Y (fy):" FontWeight="Bold"/>
-            <NumericUpDown Value="{Binding Fy}" Minimum="0.1" Increment="0.5" Margin="0, 0, 0, 25"/>
+            <NumericUpDown Value="{Binding Fy}" Minimum="0.1" Maximum="100" Increment="0.5" Margin="0, 0, 0, 25"/>
             
             <TextBlock Text="Фаза X (градуси):" FontWeight="Bold"/>
             <Grid ColumnDefinitions="*, 70">

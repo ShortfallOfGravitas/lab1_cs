@@ -69,6 +69,15 @@ public class MainViewModel : ViewModelBase
         set => SetProperty(ref _curvePoints, value);
     }
 
+    //error handling
+    private string _errorMessage = "";
+
+    public string ErrorMessage
+    {
+        get => _errorMessage;
+        set => SetProperty(ref _errorMessage, value);
+    }
+    
     public void GenerateCurveCommand()
     {
         var model = new LissajousModel(Ax, Ay, Fx, Fy, Px, Py);
